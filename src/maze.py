@@ -17,7 +17,7 @@ class Maze:
         cols: int,
         cellWidth: int,
         cellHeight: int,
-        win: Window = None,
+        win: Window | None = None,
     ):
         self.origin = origin
         self.rows = rows
@@ -45,8 +45,11 @@ class Maze:
 
     # hack to extend the line for start/end cells
     # the spec draws moves from the center of cell
-    # oterwise cells would need to know direction
+    # otherwise cells would need to know direction
     def _fixLines(self):
+        if self.win == None:
+            return
+
         color = "red"
         start = self.cells[0][0]
         end = self.cells[self.rows - 1][self.cols - 1]
@@ -100,8 +103,11 @@ class Maze:
         return False
 
     # spec has this private and called by constructor, I'm not doing that
-    # I want it separate so I can recreate cells if dimentions change
+    # I want it separate so I can recreate cells if dimensions change
     def createCells(self):
+        if self.win == None:
+            return
+
         self.cells: list[list[Cell]] = []
 
         for r in range(self.rows):
@@ -197,7 +203,7 @@ class Maze:
 def main():
 
     win = Window(500, 500)
-    win.root.title = "Maze test"
+    win.root.title("Maze test")
 
     maze = Maze(Point(100, 100), 5, 5, 60, 50, win)
     maze.createCells()

@@ -23,7 +23,7 @@ def main():
     from window import Window
 
     win = Window(500, 500)
-    win.root.title = "Line test"
+    win.root.title("Line test")
     line = Line(Point(100, 100), Point(300, 300))
     line.draw(win.canvas, "blue")
     line = Line(Point(200, 100), Point(100, 300))

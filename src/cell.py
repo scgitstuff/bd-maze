@@ -11,7 +11,7 @@ class Cell:
         win: Window,
         topLeft: Point,
         bottomRight: Point,
-        walls: Walls = None,
+        walls: Walls | None = None,
         visited: bool = False,
     ):
         self.win = win
@@ -22,8 +22,8 @@ class Cell:
         self.bottomLeft = Point(topLeft.x, bottomRight.y)
 
         self.center = Point(
-            topLeft.x + (bottomRight.x - topLeft.x) / 2,
-            topLeft.y + (bottomRight.y - topLeft.y) / 2,
+            topLeft.x + (bottomRight.x - topLeft.x) // 2,
+            topLeft.y + (bottomRight.y - topLeft.y) // 2,
         )
 
         if walls is None:
@@ -47,7 +47,7 @@ class Cell:
     def __repr__(self):
         return f"Cell({self.topLeft}, {self.bottomRight})"
 
-    # Turns out I didn't read the spec carefuly, draw was supposed to take points as args
+    # Turns out I didn't read the spec carefully, draw was supposed to take points as args
     # this makes no sense, because cells never move, always drawn in the same place
     # the points are set at construction, I'm not changing it
     def draw(self, fillColor: str = "black"):
@@ -62,8 +62,8 @@ class Cell:
         if self.walls.left:
             self.win.drawLine(Line(self.topLeft, self.bottomLeft), fillColor)
 
-    # lines do not dissapear when breaking walls, reset them
-    # I do hate this hack, it is what the lesson recomended
+    # lines do not disappear when breaking walls, reset them
+    # I do hate this hack, it is what the lesson recommended
     def _resetWalls(self):
         self.win.drawLine(Line(self.topLeft, self.topRight), "white")
         self.win.drawLine(Line(self.topRight, self.bottomRight), "white")
@@ -78,7 +78,7 @@ class Cell:
 
 def main():
     win = Window(500, 500)
-    win.root.title = "Cell test"
+    win.root.title("Cell test")
     cell1 = Cell(win, Point(100, 100), Point(200, 200))
     cell2 = Cell(win, Point(300, 300), Point(400, 400))
 

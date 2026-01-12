@@ -8,7 +8,7 @@ class Window:
         self.height = height
 
         self.root = Tk()
-        self.root.title = "Maze"
+        self.root.title("Maze")
         self.root.protocol("WM_DELETE_WINDOW", self.close)
         # self.root.resizable(True, True)
 

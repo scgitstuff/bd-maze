@@ -6,7 +6,7 @@ class Point:
     def __str__(self) -> str:
         return f"(x:{self.x}, y:{self.y})"
 
-    def asTuple(self) -> tuple[int]:
+    def asTuple(self) -> tuple[int, int]:
         return (self.x, self.y)
 
 
